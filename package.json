@@ -1,28 +1,29 @@
 {
-  "name": "SimplifyQR",
-  "version": "0.0.1",
-  "description": "Simplify Module for QR",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "dependencies": {
-    "ejs": "2.3.3",
-    "express": "4.13.3",
-    "simplify-commerce": "^1.3.0",
-    "cool-ascii-faces": "~1.3.x"
-  },
-  "engines": {
-    "node": "0.12.7"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
-  },
-  "keywords": [
-    "node",
-    "heroku",
-    "express"
-  ],
-  "license": "MIT"
+    "name": "SimplifyQR",
+    "version": "0.0.1",
+    "description": "Simplify Module for QR",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "ejs": "2.3.3",
+        "express": "4.13.3",
+        "simplify-commerce": "^1.3.0",
+        "cool-ascii-faces": "~1.3.x",
+        "pg": "4.x"
+    },
+    "engines": {
+        "node": "0.12.7"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/heroku/node-js-getting-started"
+    },
+    "keywords": [
+        "node",
+        "heroku",
+        "express"
+    ],
+    "license": "MIT"
 }
