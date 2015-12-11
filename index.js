@@ -37,8 +37,7 @@ app.get('/db', function (request, response) {
 
 app.post('/pay', function (request, response) {
     payments.create(1234, function (data){
-        response.render("<h1>Payment Done</h1>");
-        res.json(data);
+        response.json(data);
     })
 });
 
