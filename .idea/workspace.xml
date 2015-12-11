@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="aeeadd54-aac6-4770-a73d-02ad770b972f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.js" afterPath="$PROJECT_DIR$/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
     </list>
     <ignored path="simplify-qr-node.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,7 +69,7 @@
       <file leaf-file-name="index.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="3" selection-start="468" selection-end="468" vertical-scroll-proportion="0.26536313" vertical-offset="0" max-vertical-offset="1074">
+            <state line="33" column="2" selection-start="902" selection-end="902" vertical-scroll-proportion="0.46089387" vertical-offset="0" max-vertical-offset="1074">
               <folding />
             </state>
           </provider>
@@ -302,12 +301,12 @@
       <changelist id="aeeadd54-aac6-4770-a73d-02ad770b972f" name="Default" comment="" />
       <created>1449858857746</created>
       <updated>1449858857746</updated>
-      <workItem from="1449858863309" duration="354000" />
+      <workItem from="1449858863309" duration="555000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="354000" />
+    <option name="totallyTimeSpent" value="555000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-367" y="-1359" width="1886" height="1218" extended-state="0" />
@@ -375,7 +374,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="3" selection-start="468" selection-end="468" vertical-scroll-proportion="0.26536313" vertical-offset="0" max-vertical-offset="1074">
+        <state line="33" column="2" selection-start="902" selection-end="902" vertical-scroll-proportion="0.46089387" vertical-offset="0" max-vertical-offset="1074">
           <folding />
         </state>
       </provider>
