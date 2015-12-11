@@ -9,6 +9,7 @@
     "dependencies": {
         "ejs": "2.3.3",
         "express": "4.13.3",
+        "body-parser": "*",
         "simplify-commerce": "^1.3.0",
         "cool-ascii-faces": "~1.3.x",
         "pg": "4.x"

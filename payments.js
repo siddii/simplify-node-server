@@ -5,8 +5,9 @@ var Simplify = require("simplify-commerce"),
     });
 
 exports.create = function (amount, cb) {
+    console.log("#### amount = ", amount);
     client.payment.create({
-        amount: "123123",
+        amount: amount,
         description: "Node.js Sample Payment",
         card: {
             expMonth: "11",

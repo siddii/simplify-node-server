@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
 
 var pg = require('pg');
 
@@ -10,6 +11,9 @@ var payments = require('./payments');
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // views is directory for all template files
 app.set('views', __dirname + '/views');
@@ -36,7 +40,7 @@ app.get('/db', function (request, response) {
 });
 
 app.post('/pay', function (request, response) {
-    payments.create(1234, function (data){
+    payments.create(request.body.amount, function (data){
         response.json(data);
     })
 });
