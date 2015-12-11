@@ -2,9 +2,8 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 
-var pg = require('pg');
-
 var cool = require('cool-ascii-faces');
+var db = require('./db');
 
 var payments = require('./payments');
 
@@ -19,34 +18,34 @@ app.use(bodyParser.json());
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.get('/', function(request, response) {
-  response.render('pages/index');
+app.get('/', function (request, response) {
+    response.render('pages/index');
 });
 
-app.get('/cool', function(request, response) {
+app.get('/cool', function (request, response) {
     response.send(cool());
 });
 
 app.get('/db', function (request, response) {
-    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-        client.query('SELECT * FROM test_table', function(err, result) {
-            done();
-            if (err)
-            { console.error(err); response.send("Error " + err); }
-            else
-            { response.render('pages/db', {results: result.rows} ); }
-        });
+    db.runQuery('SELECT * FROM test_table', function (error, result) {
+        if (!error) {
+            response.render('pages/db', {results: result.rows});
+        }
+        else {
+            response.send("Error " + error);
+        }
     });
 });
 
+
 app.post('/pay', function (request, response) {
-    payments.create(request.body.amount, function (data){
+    payments.create(request.body.amount, function (data) {
         response.json(data);
     })
 });
 
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
+app.listen(app.get('port'), function () {
+    console.log('Node app is running on port', app.get('port'));
 });
 
 
