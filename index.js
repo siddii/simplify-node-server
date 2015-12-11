@@ -5,6 +5,8 @@ var pg = require('pg');
 
 var cool = require('cool-ascii-faces');
 
+var payments = require('./payments');
+
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
@@ -31,7 +33,14 @@ app.get('/db', function (request, response) {
             { response.render('pages/db', {results: result.rows} ); }
         });
     });
-})
+});
+
+app.post('/pay', function (request, response) {
+    payments.create(1234, function (data){
+        response.render("<h1>Payment Done</h1>");
+        res.json(data);
+    })
+});
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
