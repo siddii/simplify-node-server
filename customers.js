@@ -1,16 +1,13 @@
 var simplify = require('./simplify');
+var db = require('./db');
+var async = require('async');
 
-exports.create = function (amount, cb) {
-    simplify.client.payment.create({
-        amount: amount,
-        description: "Node.js Sample Payment",
-        card: {
-            expMonth: "11",
-            expYear: "19",
-            cvc: "123",
-            number: "5555555555554444"
-        },
-        currency: "USD"
+
+exports.create = function (name, email, card, cb) {
+    simplify.client.customer.create({
+        name: name,
+        email: email,
+        card: card
     }, function (error, data) {
         if (error) {
             console.error(JSON.stringify(error.data));
@@ -19,4 +16,36 @@ exports.create = function (amount, cb) {
         cb(data);
     });
 };
+
+function getCustomer(id, cb) {
+    simplify.client.customer.find(id, function (error, data) {
+        if (error) {
+            console.error(JSON.stringify(error.data));
+            cb(true, error);
+        }
+        cb(false, data);
+    });
+}
+
+exports.listCustomers = function (request, response) {
+    db.runQuery('SELECT * FROM customers', null, function (error, result) {
+        if (!error && result.rows) {
+            var responseArray = [];
+            async.forEachSeries(result.rows, function iterator(item, callback) {
+                getCustomer(item.id, function (error, data) {
+                    if (!error) {
+                        responseArray.push(data);
+                    }
+                    callback(error);
+                })
+            }, function done() {
+                response.json(responseArray);
+            });
+        }
+        else {
+            response.status(500).send("Error listing customers!");
+        }
+    });
+};
+
 

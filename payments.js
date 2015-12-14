@@ -2,16 +2,11 @@ var simplifyClient = require('./simplify').client;
 var db = require('./db');
 var async = require('async');
 
-exports.create = function (amount, cb) {
+exports.create = function (amount, description, customer, cb) {
     simplifyClient.payment.create({
         amount: amount,
-        description: "Node.js Sample Payment",
-        card: {
-            expMonth: "11",
-            expYear: "19",
-            cvc: "123",
-            number: "5555555555554444"
-        },
+        description: description,
+        customer: customer,
         currency: "USD"
     }, function (error, data) {
         if (error) {
@@ -33,7 +28,7 @@ function getPayment(id, cb) {
 }
 
 exports.listPayments = function (request, response) {
-    db.runQuery('SELECT * FROM payments', function (error, result) {
+    db.runQuery('SELECT * FROM payments', null, function (error, result) {
         if (!error && result.rows) {
             var responseArray = [];
             async.forEachSeries(result.rows, function iterator(item, callback) {
