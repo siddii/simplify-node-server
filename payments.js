@@ -10,7 +10,7 @@ exports.create = function (amount, description, customer, cb) {
         currency: "USD"
     }, function (error, data) {
         if (error) {
-            console.error(JSON.stringify(error.data));
+            console.error(JSON.stringify(error));
             cb(error);
         }
         cb(data);
@@ -20,7 +20,7 @@ exports.create = function (amount, description, customer, cb) {
 function getPayment(id, cb) {
     simplifyClient.payment.find(id, function (error, data) {
         if (error) {
-            console.error(JSON.stringify(error.data));
+            console.error(JSON.stringify(error));
             cb(true, error);
         }
         cb(false, data);

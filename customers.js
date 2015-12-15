@@ -3,14 +3,16 @@ var db = require('./db');
 var async = require('async');
 
 
-exports.create = function (name, email, card, cb) {
+exports.create = function (name, email, token, cb) {
+    console.log("#### name = ", name, email, token);
     simplify.client.customer.create({
         name: name,
         email: email,
-        card: card
+        token: token
     }, function (error, data) {
+        console.log("##### data = ", data, error);
         if (error) {
-            console.error(JSON.stringify(error.data));
+            console.error(JSON.stringify(error));
             cb(error);
         }
         cb(data);
@@ -20,7 +22,7 @@ exports.create = function (name, email, card, cb) {
 function getCustomer(id, cb) {
     simplify.client.customer.find(id, function (error, data) {
         if (error) {
-            console.error(JSON.stringify(error.data));
+            console.error(JSON.stringify(error));
             cb(true, error);
         }
         cb(false, data);

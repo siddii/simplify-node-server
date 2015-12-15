@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="//getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script type="text/javascript" src="//www.simplify.com/commerce/v1/simplify.js"></script>
+
+  <script>
+
+    $(document).ready(function () {
+  			var $selYear = $('#cc-exp-year');
+  			$error = $(".error");
+  			$success = $(".success");
+  			$paymentBtn = $("#process-payment-btn");
+  			$busyContainer = $('.busy-container');
+
+  			var currentYear = new Date().getFullYear();
+  			for (var year = currentYear; year < currentYear + 10; year++) {
+  				$selYear.append("<option " + ((year === (currentYear + 1)) ? " selected " : "") + " value='" + year.toString().substr(2) + "'>" + year + "</option>");
+  			}
+
+  			$paymentBtn.click(function () {
+  				$busyContainer.fadeIn();
+  				$error.fadeOut().html("");
+  				$success.fadeOut().html("");
+  				// Disable the submit button
+  				$paymentBtn.attr("disabled", "disabled");
+  				// Generate a card token & handle the response
+  				SimplifyCommerce.generateToken({
+  					key: "<%= publicKey%>",
+  					card: {
+  						number: $("#cc-number").val(),
+  						cvc: $("#cc-cvc").val(),
+  						expMonth: $("#cc-exp-month").val(),
+  						expYear: $("#cc-exp-year").val()
+  					}
+  				}, function (data){
+
+  				    if (data.error) {
+
+  				    }
+  				    else {
+  				        $('#cardToken').html("Card Token = " + data.id);
+  				    }
+
+  				});
+  			});
+
+  		});
+
+
+  </script>
+
+</head>
+
+<body>
+<div class="container">
+    <form role="form" class="form-inline" id="simplify-payment-form">
+    		<table class="table table-bordered" width="100%">
+    			<tr>
+    				<td><label class="text">Credit Card Number: </label></td>
+    				<td>
+    					<input id="cc-number" type="text" class="w-input" maxlength="20" autocomplete="off"
+    						   value="5555555555554444"/>
+    					</label></td>
+    			</tr>
+    			<tr>
+    				<td><label class="text">CVC: </label></td>
+    				<td>
+    					<input id="cc-cvc" type="text" class="w-input" maxlength="4" autocomplete="off" value="123"/>
+    					</label></td>
+    			</tr>
+    			<tr>
+    				<td><label class="text">Expiry Date: </label></td>
+    				<td>
+    					<select id="cc-exp-month" class="w-select">
+    						<option value="01">Jan</option>
+    						<option value="02">Feb</option>
+    						<option value="03">Mar</option>
+    						<option value="04">Apr</option>
+    						<option value="05">May</option>
+    						<option value="06">Jun</option>
+    						<option value="07">Jul</option>
+    						<option value="08">Aug</option>
+    						<option value="09">Sep</option>
+    						<option value="10">Oct</option>
+    						<option value="11">Nov</option>
+    						<option value="12">Dec</option>
+    					</select>
+    					<select id="cc-exp-year" class="w-select">
+    					</select>
+    			</tr>
+    			<tr>
+    				<td></td>
+    				<td>
+    					<button id="process-payment-btn" class="btn btn-primary">Generate Card Token</button>
+    				</td>
+    			</tr>
+    		</table>
+    	</form>
+
+    	<h3 id="cardToken"></h3>
+</div>
+</body>
+</html>
