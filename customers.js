@@ -3,11 +3,12 @@ var db = require('./db');
 var async = require('async');
 
 
-exports.create = function (name, email, card, cb) {
+exports.create = function (name, email, cardToken, cb) {
+    console.log("Public Key: " + simplify.client.public_key);
     simplify.client.customer.create({
         name: name,
         email: email,
-        card: card
+        token: cardToken
     }, function (error, data) {
         if (error) {
             console.error(JSON.stringify(error.data));

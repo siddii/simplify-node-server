@@ -62,7 +62,7 @@ app.post('/pay', function (request, response) {
 app.get('/customers', customers.listCustomers);
 
 app.post('/addCustomer', function (request, response) {
-    customers.create(request.body.name, request.body.email, request.body.card, function (data) {
+    customers.create(request.body.name, request.body.email, request.body.cardToken, function (data) {
         if (data.id) {
             db.runQuery("insert into customers(id, name, email) values($1, $2, $3)", [data.id, request.body.name, request.body.email], function (error, result) {
                 if (!error) {
